@@ -1446,7 +1446,7 @@ class AdminSupplyOrdersControllerCore extends AdminController
                         return;
                     }
 
-                    $price = $supply_order_detail->unit_price_te;
+                    $price = (float) $supply_order_detail->unit_price_te;
                     // converts the unit price to the warehouse currency if needed
                     if ($supply_order->id_currency != $warehouse->id_currency) {
                         // first, converts the price to the default currency
@@ -1454,7 +1454,7 @@ class AdminSupplyOrdersControllerCore extends AdminController
                             $supply_order->id_currency, false);
 
                         // then, converts the newly calculated pri-ce from the default currency to the needed currency
-                        $price = Tools::ps_round(Tools::convertPrice($price_converted_to_default_currency,
+                        $price = (float) Tools::ps_round(Tools::convertPrice($price_converted_to_default_currency,
                             $warehouse->id_currency, true), 6);
                     }
 
